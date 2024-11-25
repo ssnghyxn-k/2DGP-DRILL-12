@@ -123,6 +123,9 @@ class Zombie:
         self.loc_no = (self.loc_no+1) % len(self.patrol_location)
         return BehaviorTree.SUCCESS
 
+    def away_from_boy(self, r=7):
+        pass
+
     def build_behavior_tree(self):
         a1 = Action('Set target location', self.set_target_location, 1000, 1000)
         a2 = Action('Move to', self.move_to)
