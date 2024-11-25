@@ -129,7 +129,7 @@ class Zombie:
         root = move_to_target_location = Sequence('Move to target location', a1, a2)
 
         a3 = Action('Set random location', self.set_random_location)
-        root = wander = Sequence('Wander, a3, a2')
+        root = wander = Sequence('Wander', a3, a2)
 
         c1 = Condition('소년이 근처에 있는가?', self.is_boy_nearby, 7)
         a4 = Action('소년한테 접근', self.move_to_boy)
