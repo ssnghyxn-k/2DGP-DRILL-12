@@ -124,7 +124,12 @@ class Zombie:
         return BehaviorTree.SUCCESS
 
     def away_from_boy(self, r=7):
-        pass
+        self.state = 'Walk'
+        self.move_slightly_to(play_mode.boy.x, play_mode.boy.y)
+        if self.distance_less_than(play_mode.boy.x, play_mode.boy.y, self.x, self.y, r):
+            return BehaviorTree.RUNNING
+        else:
+            return BehaviorTree.SUCCESS
 
     def build_behavior_tree(self):
         a1 = Action('Set target location', self.set_target_location, 1000, 1000)
@@ -142,6 +147,8 @@ class Zombie:
 
         a5 = Action('순찰 위치 가져오기', self.get_patrol_location)
         root = patrol = Sequence('순찰', a5, a2)
+
+        root = chase_or_away = Selector('추적 또는 도망', a5)
 
         self.bt = BehaviorTree(root)
 
